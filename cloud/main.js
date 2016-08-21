@@ -1,3 +1,4 @@
+console.log('hello from cloud code');
 Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
@@ -42,7 +43,7 @@ Parse.Cloud.define("saveStripeCustomerId", function (request, response) {
     },
     success: function(customer) {
         Parse.Cloud.useMasterKey();
-        var Usr = request.user;
+        var Usr = user.getSessionToken();
             Usr.set("StripeCustomerId", customer.data.id);
             Usr.save(null, {
                 success: function(httpResponse) {
