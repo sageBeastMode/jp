@@ -42,6 +42,8 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
     });
 });
 
+//https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/chargePTGUser
+
 //add Stripe customer card.
 Parse.Cloud.define("saveStripeCardId", function (request, response) {
  Parse.Cloud.httpRequest({
