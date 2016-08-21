@@ -3,6 +3,9 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
+app.post('/stripe', function(req, res){
+
+Parse.initialize("1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH", "lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z"); 
 Parse.Cloud.define("chargePTGUser", function (request, response) {
     Parse.Cloud.httpRequest({
     method: 'POST',
@@ -50,6 +53,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
     }
     });
 });
+
 
 //https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/chargePTGUser
 
@@ -714,4 +718,9 @@ Parse.Cloud.define("deleteStripeAccount", function (request, response) {
         });
                     
  });
+
+
+});
+
+
 

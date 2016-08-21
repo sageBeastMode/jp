@@ -7,6 +7,11 @@ var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
+var stripe = require('stripe')('sk_test_PvLy60iEFmCJrYqroqfRB1jm');
+var Parse = require('parse').Parse;
+var Parse = require('parse/node').Parse;
+var bodyParser = require('body-parser');
+
 if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
@@ -53,3 +58,7 @@ httpServer.listen(port, function() {
 
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
+
+app.use( bodyParser.json() );
+
+
