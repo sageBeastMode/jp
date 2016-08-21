@@ -3,6 +3,45 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
+Parse.Cloud.define("chargePTGUser", function (request, response) {
+    Parse.Cloud.httpRequest({
+    method: 'POST',
+    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "events",
+
+        var data = request.params["data"];
+        var type = request.params["type"];
+        var accountId = request.params["user_id"];
+
+        var card = data.object.source.id;
+        var cardLast4 = data.object.source.last4;
+        var amount = data.object.amount;
+        var typeId = data.object.id;
+        var customerId = data.object.customer;
+        var objectName = data.object.object;
+        var eventObject = new Parse.Object("WebhookEvents");
+        eventObject.set("customerId", customerId);
+        eventObject.set("accountId", accountId);
+        eventObject.set("amount", amount);
+        eventObject.set("type", type);
+        eventObject.set("card", card);
+        eventObject.set("cardLast4", cardLast4);
+        eventObject.set("objectName", objectName);
+        eventObject.set("typeId", typeId);
+        eventObject.save(null, {
+          success: function(eventObject) {
+            response.success('** WEBHOOK WORKING **' + eventObject.id);
+            // Execute any logic that should take place after the object is saved.
+            alert('New object created with objectId: ' + eventObject.id);
+          },
+          error: function(eventObject, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and message.
+            alert('Failed to create new object, with error code: ' + error.message);
+          }
+        });
+    });
+});
+
 //add Stripe customer card.
 Parse.Cloud.define("saveStripeCardId", function (request, response) {
  Parse.Cloud.httpRequest({
