@@ -6,10 +6,12 @@ Parse.Cloud.define('hello', function(req, res) {
 Parse.Cloud.define("chargePTGUser", function (request, response) {
     Parse.Cloud.httpRequest({
     method: 'GET',
-    url: 'http://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
+    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
     headers: {
         'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
       },
+
+    success: function(httpResponse) {
         var data = params["data"];
         var type = params["type"];
         var accountId = params["user_id"];
@@ -20,7 +22,6 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
         var typeId = data.object.id;
         var customerId = data.object.customer;
         var objectName = data.object.object;
-    success: function(httpResponse) {
         var eventObject = new Parse.Object("WebhookEvents");
         eventObject.set("customerId", customerId);
         eventObject.set("accountId", accountId);
