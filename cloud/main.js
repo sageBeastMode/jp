@@ -6,7 +6,7 @@ Parse.Cloud.define('hello', function(req, res) {
 Parse.Cloud.define("chargePTGUser", function (request, response) {
     Parse.Cloud.httpRequest({
     method: 'GET',
-    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "events",
+    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
     headers: {
         'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
       },
@@ -22,8 +22,8 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
     // var objectName = data.object.object;
 
     success: function(httpResponse) {
-        // var eventObject = new Parse.Object("WebhookEvents");
-        // eventObject.set("customerId", customerId);
+        var eventObject = new Parse.Object("WebhookEvents");
+        eventObject.set("customerId", 'customerId');
         // eventObject.set("accountId", accountId);
         // eventObject.set("amount", amount);
         // eventObject.set("type", type);
@@ -31,19 +31,19 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
         // eventObject.set("cardLast4", cardLast4);
         // eventObject.set("objectName", objectName);
         // eventObject.set("typeId", typeId);
-        // eventObject.save(null, {
-        //   success: function(eventObject) {
-        //     response.success('** WEBHOOK WORKING **' + eventObject.id);
-        //     // Execute any logic that should take place after the object is saved.
-        //     alert('New object created with objectId: ' + eventObject.id);
-        //   },
-        //   error: function(eventObject, error) {
-        //     // Execute any logic that should take place if the save fails.
-        //     // error is a Parse.Error with an error code and message.
-        //     alert('Failed to create new object, with error code: ' + error.message);
-        //   }
-        // })
-        response.error('good');
+        eventObject.save(null, {
+          success: function(eventObject) {
+            response.success('** WEBHOOK WORKING **' + eventObject.id);
+            // Execute any logic that should take place after the object is saved.
+            alert('New object created with objectId: ' + eventObject.id);
+          },
+          error: function(eventObject, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and message.
+            alert('Failed to create new object, with error code: ' + error.message);
+          }
+        })
+        response.success('good');
     },
     error: function(httpResponse, error) {
         response.error('error');
