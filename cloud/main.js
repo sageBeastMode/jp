@@ -3,23 +3,13 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
-var stripe = require('stripe')('sk_test_PvLy60iEFmCJrYqroqfRB1jm');
-var Parse = require('parse').Parse;
-var Parse = require('parse/node').Parse;
-var bodyParser = require('body-parser');
-
-app.use( bodyParser.json() );
-
-app.post('/stripe', function(req, res){
-
-Parse.initialize("1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH", "lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z"); 
 Parse.Cloud.define("chargePTGUser", function (request, response) {
     Parse.Cloud.httpRequest({
     method: 'POST',
     url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "events",
-    // headers: {
-    //     'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
-    //   },
+    headers: {
+        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+      },
     // var data = request.params["data"];
     // var type = request.params["type"];
     // var accountId = request.params["user_id"];
@@ -60,7 +50,6 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
     }
     });
 });
-
 
 //https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/chargePTGUser
 
@@ -725,9 +714,4 @@ Parse.Cloud.define("deleteStripeAccount", function (request, response) {
         });
                     
  });
-
-
-});
-
-
 
