@@ -98,7 +98,7 @@ Parse.Cloud.define("deleteStripeCustomerCard", function (request, response) {
 //Create Stripe accounts.
 Parse.Cloud.define("updateStripeBankAcccount", function (request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
@@ -118,7 +118,7 @@ Parse.Cloud.define("updateStripeBankAcccount", function (request, response)
 
 Parse.Cloud.define("updateUSAcccount", function (request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
@@ -138,6 +138,7 @@ Parse.Cloud.define("updateUSAcccount", function (request, response)
         'legal_entity[ssn_last_4]':request.params.ssnLast4,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                 Usr.set("firstName",request.params.first_name);
                 Usr.set("lastName",request.params.last_name);
@@ -168,7 +169,7 @@ Parse.Cloud.define("updateUSAcccount", function (request, response)
 
 Parse.Cloud.define("updateCAAcccount", function (request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
@@ -188,6 +189,7 @@ Parse.Cloud.define("updateCAAcccount", function (request, response)
         'legal_entity[personal_id_number]':request.params.ssnLast4,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                 Usr.set("firstName",request.params.first_name);
                 Usr.set("lastName",request.params.last_name);
@@ -218,7 +220,7 @@ Parse.Cloud.define("updateCAAcccount", function (request, response)
 
 Parse.Cloud.define("updateAcccount", function (request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
@@ -237,6 +239,7 @@ Parse.Cloud.define("updateAcccount", function (request, response)
         'legal_entity[address][postal_code]':request.params.postal_code,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                 Usr.set("firstName",request.params.first_name);
                 Usr.set("lastName",request.params.last_name);
@@ -268,7 +271,7 @@ Parse.Cloud.define("updateAcccount", function (request, response)
 
 Parse.Cloud.define("saveStripeAcccount", function (request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
@@ -295,6 +298,7 @@ Parse.Cloud.define("saveStripeAcccount", function (request, response)
         'tos_acceptance[ip]':request.params.ip,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                             Usr.set("StripeAccountId",httpResponse.data.id );
                             Usr.set("firstName",request.params.first_name);
@@ -329,7 +333,7 @@ Parse.Cloud.define("saveStripeAcccount", function (request, response)
 
 Parse.Cloud.define("saveCAStripeAcccount", function(request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
@@ -356,6 +360,7 @@ Parse.Cloud.define("saveCAStripeAcccount", function(request, response)
         'tos_acceptance[ip]':request.params.ip,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                             Usr.set("StripeAccountId",httpResponse.data.id );
                             Usr.set("firstName",request.params.first_name);
@@ -390,7 +395,7 @@ Parse.Cloud.define("saveCAStripeAcccount", function(request, response)
 
 Parse.Cloud.define("saveAUStripeAcccount", function(request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
@@ -416,6 +421,7 @@ Parse.Cloud.define("saveAUStripeAcccount", function(request, response)
         'tos_acceptance[ip]':request.params.ip,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                             Usr.set("StripeAccountId",httpResponse.data.id );
                             Usr.set("firstName",request.params.first_name);
@@ -450,7 +456,7 @@ Parse.Cloud.define("saveAUStripeAcccount", function(request, response)
 
 Parse.Cloud.define("saveEUStripeAcccount", function(request, response) 
 {  
-        Parse.Cloud.httpRequest({
+    Parse.Cloud.httpRequest({
       method: 'POST',
       url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
@@ -476,6 +482,7 @@ Parse.Cloud.define("saveEUStripeAcccount", function(request, response)
         'tos_acceptance[ip]':request.params.ip,
       },
       success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
             var Usr = request.user;
                             Usr.set("StripeAccountId",httpResponse.data.id );
                             Usr.set("firstName",request.params.first_name);
