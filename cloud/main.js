@@ -515,3 +515,153 @@ Parse.Cloud.define("saveEUStripeAcccount", function(request, response)
    
 });
 
+//Create Customer subscription.
+Parse.Cloud.define("createAccountPlan", function (request, response) {
+     Parse.Cloud.httpRequest({
+        method:"POST",
+        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/plans",  
+        headers: {
+        'Stripe-Account': request.params.accountId
+        },
+        body: {
+            'amount': request.params.amount,
+            'interval': 'day',
+            'interval_count':request.params.intervalCount,
+            'name': request.params.planName,
+            'currency': 'usd',
+            'id':request.params.planId,
+        },
+        success: function(httpResponse) {
+        response.success(httpResponse.text);
+        },
+        error: function(httpResponse) {
+        response.error('Request failed with response code' + httpResponse.status);
+        }
+    });                 
+ });
+
+Parse.Cloud.define("createAccountCustomerToken", function (request, response) {
+     Parse.Cloud.httpRequest({
+        method:"POST",
+        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/tokens",  
+        headers: {
+        'Stripe-Account': request.params.accountId
+        },
+        body: {
+            'customer':request.params.customerId,
+            'card':request.params.cardId,
+        },
+        success: function(httpResponse) {
+        Parse.Cloud.useMasterKey();
+        var Activity = Parse.Object.extend("Activity");
+         
+        var GalleryObject = new Parse.Object("Gallery");
+         GalleryObject.id = request.params.galleryId;
+         
+        var subscribe = new Activity();
+         subscribe.save({customerToken:httpResponse.data.id, type:'follow', toGallery:GalleryObject, fromUser:request.user},
+                {
+                    success: function(httpResponse) {
+                    response.success("good");
+                    },
+                    error: function(httpResponse, error) {
+                    response.error(response.status);
+                    }
+                });
+            response.success(httpResponse.text);
+        },
+        error: function(httpResponse) {
+        response.error('Request failed with response code' + httpResponse.status);
+        }
+    });                 
+ });
+
+Parse.Cloud.define("createAccountCustomerSubscription", function (request, response) {
+     Parse.Cloud.httpRequest({
+        method:"POST",
+        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/customers",  
+        headers: {
+        'Stripe-Account': request.params.accountId
+        },
+        body: {
+            'source':request.params.customerToken,
+            'plan':request.params.galleryId,
+            'application_fee_percent':30,
+            'email':request.params.userEmail,
+            'description':request.params.userName,
+        },
+        success: function(httpResponse) {
+            Parse.Cloud.useMasterKey();
+            var Usr = request.user;
+                Usr.set(request.params.galleryId,httpResponse.data.id);
+                Usr.save(null, {
+                success: function(httpResponse) {
+                response.success("good");
+                },
+                error: function(httpResponse, error) {
+                response.error(response.status);
+                }
+            })
+        response.success(httpResponse.text);
+        },
+        error: function(httpResponse) {
+        response.error('Request failed with response code' + httpResponse.status);
+        }
+    });                 
+ });
+
+Parse.Cloud.define("cancelAccountCustomerSubscription", function (request, response) {
+     Parse.Cloud.httpRequest({
+        method:"DELETE",
+        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/customers/" + request.params.customerId,  
+        headers: {
+        'Stripe-Account': request.params.accountId
+        },
+        success: function(httpResponse) {
+        response.success(httpResponse.text);
+        },
+        error: function(httpResponse) {
+        response.error('Request failed with response code' + httpResponse.status);
+        }
+    });                 
+ });
+
+//Delete Stripe account
+Parse.Cloud.define("deleteStripeAccount", function (request, response) {
+         Parse.Cloud.httpRequest({
+                method:"DELETE",
+                 url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1" + "/accounts/" + request.params.accountId,
+              
+            success: function(httpResponse) {
+                Parse.Cloud.useMasterKey();
+                var Usr = request.user;
+                    Usr.unset("firstName");
+                    Usr.unset("lastName");
+                    Usr.unset("phoneNumber");
+                    Usr.unset("line1");
+                    Usr.unset("line2");
+                    Usr.unset("city");
+                    Usr.unset("state");
+                    Usr.unset("postalCode");
+                    Usr.unset("dobMonth");
+                    Usr.unset("dobDay");
+                    Usr.unset("dobYear");
+                    Usr.unset("accountLast4");
+                    Usr.unset("country");
+                    Usr.save(null, {
+                        success: function(userResponse) {
+                        response.success(userResponse.text);
+                        },
+                        error: function(userResponse) {
+                        response.error(userResponse.status);
+                        }
+                    })
+            response.success(httpResponse.text);
+            },
+            error: function(httpResponse) {
+            response.error('Request failed with response code' + httpResponse.status);
+            }
+        });
+                    
+ });
+
