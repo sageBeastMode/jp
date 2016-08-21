@@ -8,16 +8,18 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
     method: 'POST',
     url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "events",
 
-        var data = request.params["data"];
-        var type = request.params["type"];
-        var accountId = request.params["user_id"];
+    var data = request.params["data"];
+    var type = request.params["type"];
+    var accountId = request.params["user_id"];
 
-        var card = data.object.source.id;
-        var cardLast4 = data.object.source.last4;
-        var amount = data.object.amount;
-        var typeId = data.object.id;
-        var customerId = data.object.customer;
-        var objectName = data.object.object;
+    var card = data.object.source.id;
+    var cardLast4 = data.object.source.last4;
+    var amount = data.object.amount;
+    var typeId = data.object.id;
+    var customerId = data.object.customer;
+    var objectName = data.object.object;
+
+    success: function(httpResponse) {
         var eventObject = new Parse.Object("WebhookEvents");
         eventObject.set("customerId", customerId);
         eventObject.set("accountId", accountId);
@@ -38,7 +40,11 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
             // error is a Parse.Error with an error code and message.
             alert('Failed to create new object, with error code: ' + error.message);
           }
-        });
+        })
+    },
+    error: function(httpResponse, error) {
+        response.error(response.message);
+    }
     });
 });
 
