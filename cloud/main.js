@@ -6,7 +6,7 @@ Parse.Cloud.define('hello', function(req, res) {
 Parse.Cloud.define("chargePTGUser", function (request, response) {
     Parse.Cloud.httpRequest({
     method: 'GET',
-    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
+    url: 'http://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
     headers: {
         'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
       },
