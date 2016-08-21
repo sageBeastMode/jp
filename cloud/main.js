@@ -3,6 +3,13 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
+var stripe = require('stripe')('sk_test_PvLy60iEFmCJrYqroqfRB1jm');
+var Parse = require('parse').Parse;
+var Parse = require('parse/node').Parse;
+var bodyParser = require('body-parser');
+
+app.use( bodyParser.json() );
+
 app.post('/stripe', function(req, res){
 
 Parse.initialize("1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH", "lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z"); 
