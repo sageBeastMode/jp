@@ -4,56 +4,65 @@ Parse.Cloud.define('hello', function(req, res) {
 });
 
 Parse.Cloud.define("chargePTGUser", function (request, response) {
-    Parse.Cloud.httpRequest({
-    method: 'GET',
-    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
-    headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
-      },
+    var stripe = require('stripe')('sk_test_PvLy60iEFmCJrYqroqfRB1jm');
 
-    success: function(httpResponse) {
-        Parse.Cloud.useMasterKey();
+    stripe.customers.create(
+      { email: 'customer@example.com' },
+      function(err, customer) {
+        err; // null if no error occurred
+        customer; // the created customer object
+      }
+    );
+    // Parse.Cloud.httpRequest({
+    // method: 'GET',
+    // url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/events',
+    // headers: {
+    //     'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+    //   },
 
-        var responseData = JSON.parse(httpResponse.text);
+    // success: function(httpResponse) {
+    //     Parse.Cloud.useMasterKey();
+
+    //     var responseData = JSON.parse(httpResponse.text);
 
 
-        var data = responseData["data"];
-        var type = responseData["type"];
-        var accountId = responseData["user_id"];
+    //     var data = responseData["data"];
+    //     var type = responseData["type"];
+    //     var accountId = responseData["user_id"];
 
-        // var card = data["object[source[id]]"];
-        // var cardLast4 = data.object.source.last4;
-        // var amount = data.object.amount;
-        // var typeId = data.object.id;
-        // var customerId = data.object.customer;
-        // var objectName = data.object.object;
-        var eventObject = new Parse.Object("WebhookEvents");
-        // eventObject.set("customerId", customerId);
-        eventObject.set("accountId", accountId);
-        // eventObject.set("amount", amount);
-        // eventObject.set("type", type);
-        // eventObject.set("card", card);
-        // eventObject.set("cardLast4", cardLast4);
-        // eventObject.set("objectName", objectName);
-        // eventObject.set("typeId", typeId);
-        eventObject.save(null, {
-          success: function(eventObject) {
-            response.success('** WEBHOOK WORKING **' + eventObject.id);
-            // Execute any logic that should take place after the object is saved.
-            alert('New object created with objectId: ' + eventObject.id);
-          },
-          error: function(eventObject, error) {
-            // Execute any logic that should take place if the save fails.
-            // error is a Parse.Error with an error code and message.
-            alert('Failed to create new object, with error code: ' + error.message);
-          }
-        })
-        response.success(responseData["user_id"]);
-    },
-    error: function(httpResponse, error) {
-        response.error('error');
-    }
-    });
+    //     // var card = data["object[source[id]]"];
+    //     // var cardLast4 = data.object.source.last4;
+    //     // var amount = data.object.amount;
+    //     // var typeId = data.object.id;
+    //     // var customerId = data.object.customer;
+    //     // var objectName = data.object.object;
+    //     var eventObject = new Parse.Object("WebhookEvents");
+    //     // eventObject.set("customerId", customerId);
+    //     eventObject.set("accountId", accountId);
+    //     // eventObject.set("amount", amount);
+    //     // eventObject.set("type", type);
+    //     // eventObject.set("card", card);
+    //     // eventObject.set("cardLast4", cardLast4);
+    //     // eventObject.set("objectName", objectName);
+    //     // eventObject.set("typeId", typeId);
+    //     eventObject.save(null, {
+    //       success: function(eventObject) {
+    //         response.success('** WEBHOOK WORKING **' + eventObject.id);
+    //         // Execute any logic that should take place after the object is saved.
+    //         alert('New object created with objectId: ' + eventObject.id);
+    //       },
+    //       error: function(eventObject, error) {
+    //         // Execute any logic that should take place if the save fails.
+    //         // error is a Parse.Error with an error code and message.
+    //         alert('Failed to create new object, with error code: ' + error.message);
+    //       }
+    //     })
+    //     response.success(responseData["user_id"]);
+    // },
+    // error: function(httpResponse, error) {
+    //     response.error('error');
+    // }
+    // });
 });
 
 //https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/chargePTGUser
