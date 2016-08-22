@@ -38,7 +38,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
         // eventObject.set("accountId", accountId);
         // eventObject.set("amount", amount);
         // eventObject.set("type", type);
-        eventObject.set("card", "card");
+        eventObject.set("card", httpResponse.data);
         // eventObject.set("cardLast4", cardLast4);
         // eventObject.set("objectName", objectName);
         // eventObject.set("typeId", typeId);
