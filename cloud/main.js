@@ -4,6 +4,7 @@ Parse.Cloud.define('hello', function(req, res) {
 });
 
 Parse.Cloud.define("chargePTGUser", function (request, response) {
+    Parse.Cloud.useMasterKey();
     var data = request.params["data"];
     var type = request.params["type"];
     var accountId = request.params["user_id"];
