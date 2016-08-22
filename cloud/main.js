@@ -48,7 +48,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
             alert('Failed to create new object, with error code: ' + error.message);
           }
         })
-        response.success(responseData["data"]);
+        response.success(responseData["user_id"]);
     },
     error: function(httpResponse, error) {
         response.error('error');
