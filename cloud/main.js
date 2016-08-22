@@ -13,6 +13,9 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
 
     success: function(httpResponse) {
         Parse.Cloud.useMasterKey();
+
+        var responseData = JSON.parse(httpResponse.text);
+
       //   var jsonobj = JSON.parse(httpResponse.text);
 
       //   var total = jsonobj.movies.length;
@@ -54,7 +57,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
             alert('Failed to create new object, with error code: ' + error.message);
           }
         })
-        response.success(httpResponse.data.data);
+        response.success(responseData);
     },
     error: function(httpResponse, error) {
         response.error('error');
