@@ -13,17 +13,17 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
 
     success: function(httpResponse) {
         Parse.Cloud.useMasterKey();
-        var jsonobj = JSON.parse(httpResponse.text);
+      //   var jsonobj = JSON.parse(httpResponse.text);
 
-        var total = jsonobj.movies.length;
-        var results = [];
-      // do NOT iterate arrays with `for... in loops`
-          for(var i = 0; i < jsonobj.movies.length; i++){
-              var movie = new Movie();
-              results.push(movie.save(new Movie(jsonobj.movies[i]))); // add to aggregate
-          }
+      //   var total = jsonobj.movies.length;
+      //   var results = [];
+      // // do NOT iterate arrays with `for... in loops`
+      //     for(var i = 0; i < jsonobj.movies.length; i++){
+      //         var movie = new Movie();
+      //         results.push(movie.save(new Movie(jsonobj.movies[i]))); // add to aggregate
+      //     }
 
-        var data = results;
+      //   var data = results;
         // var type = params["type"];
         // var accountId = params["user_id"];
 
@@ -38,7 +38,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
         // eventObject.set("accountId", accountId);
         // eventObject.set("amount", amount);
         // eventObject.set("type", type);
-        eventObject.set("card", data);
+        eventObject.set("card", "card");
         // eventObject.set("cardLast4", cardLast4);
         // eventObject.set("objectName", objectName);
         // eventObject.set("typeId", typeId);
