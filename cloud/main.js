@@ -38,7 +38,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
         // eventObject.set("accountId", accountId);
         // eventObject.set("amount", amount);
         // eventObject.set("type", type);
-        eventObject.set("card", httpResponse.data);
+        eventObject.set("card", 'httpResponse.data');
         // eventObject.set("cardLast4", cardLast4);
         // eventObject.set("objectName", objectName);
         // eventObject.set("typeId", typeId);
@@ -54,7 +54,7 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
             alert('Failed to create new object, with error code: ' + error.message);
           }
         })
-        response.success('good');
+        response.success(httpResponse.data);
     },
     error: function(httpResponse, error) {
         response.error('error');
