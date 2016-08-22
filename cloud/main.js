@@ -75,7 +75,7 @@ Parse.Cloud.define("updatePTGUser", function (request, response) {
 Parse.Cloud.define("saveStripeCardId", function (request, response) {
  Parse.Cloud.httpRequest({
     method: 'POST',
-    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "customers/" + request.params.customerId + "/cards",
+    url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "customers/" + request.params.customerId + "/cards",
 
     body: "card="+request.params.cardToken, 
     success: function(card) {
@@ -102,9 +102,9 @@ Parse.Cloud.define("saveStripeCardId", function (request, response) {
 Parse.Cloud.define("saveStripeCustomerId", function (request, response) {
  Parse.Cloud.httpRequest({
     method: 'POST',
-    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "customers",
+    url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "customers",
     headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         "email":request.params.email, 
@@ -132,9 +132,9 @@ Parse.Cloud.define("saveStripeCustomerId", function (request, response) {
 Parse.Cloud.define("updateCustomerCard", function (request, response) {
  Parse.Cloud.httpRequest({
     method: 'POST',
-    url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "customers/" + request.params.customerId,
+    url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "customers/" + request.params.customerId,
     headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         "default_source":request.params.cardId, 
@@ -152,7 +152,7 @@ Parse.Cloud.define("updateCustomerCard", function (request, response) {
 Parse.Cloud.define("deleteStripeCustomerCard", function (request, response) {
          Parse.Cloud.httpRequest({
                 method:"DELETE",
-                 url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1" + "/customers/" + request.params.customerId + "/cards/" + request.params.cardId,
+                 url: "https://" + "sk_test_ZfEJGW8n8GPA21dMDgihwuj2" + ':@' + "api.stripe.com/v1" + "/customers/" + request.params.customerId + "/cards/" + request.params.cardId,
               
                 success: function(httpResponse) {
                 response.success("good");
@@ -168,9 +168,9 @@ Parse.Cloud.define("updateStripeBankAcccount", function (request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'external_account': request.params.bankToken,
@@ -188,9 +188,9 @@ Parse.Cloud.define("updateUSAcccount", function (request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'legal_entity[first_name]':request.params.first_name,
@@ -239,9 +239,9 @@ Parse.Cloud.define("updateCAAcccount", function (request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'legal_entity[first_name]':request.params.first_name,
@@ -290,9 +290,9 @@ Parse.Cloud.define("updateAcccount", function (request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts/" + request.params.accountId, 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'legal_entity[first_name]':request.params.first_name,
@@ -341,9 +341,9 @@ Parse.Cloud.define("saveStripeAcccount", function (request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'managed': true,
@@ -403,9 +403,9 @@ Parse.Cloud.define("saveCAStripeAcccount", function(request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'managed': true,
@@ -465,9 +465,9 @@ Parse.Cloud.define("saveAUStripeAcccount", function(request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'managed': true,
@@ -526,9 +526,9 @@ Parse.Cloud.define("saveEUStripeAcccount", function(request, response)
 {  
     Parse.Cloud.httpRequest({
       method: 'POST',
-      url: 'https://' + 'sk_test_PvLy60iEFmCJrYqroqfRB1jm' + ':@' + 'api.stripe.com/v1/' + "accounts", 
+      url: 'https://' + 'sk_test_ZfEJGW8n8GPA21dMDgihwuj2' + ':@' + 'api.stripe.com/v1/' + "accounts", 
       headers: {
-        'Authorization': 'Basic c2tfdGVzdF9Qdkx5NjBpRUZtQ0pyWXFyb3FmUkIxam0'
+        'Authorization': 'Basic c2tfdGVzdF9aZkVKR1c4bjhHUEEyMWRNRGdpaHd1ajI'
       },
       body: {
         'managed': true,
@@ -587,7 +587,7 @@ Parse.Cloud.define("saveEUStripeAcccount", function(request, response)
 Parse.Cloud.define("createAccountPlan", function (request, response) {
      Parse.Cloud.httpRequest({
         method:"POST",
-        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/plans",  
+        url: "https://" + "sk_test_ZfEJGW8n8GPA21dMDgihwuj2" + ':@' + "api.stripe.com/v1/plans",  
         headers: {
         'Stripe-Account': request.params.accountId
         },
@@ -611,7 +611,7 @@ Parse.Cloud.define("createAccountPlan", function (request, response) {
 Parse.Cloud.define("createAccountCustomerToken", function (request, response) {
      Parse.Cloud.httpRequest({
         method:"POST",
-        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/tokens",  
+        url: "https://" + "sk_test_ZfEJGW8n8GPA21dMDgihwuj2" + ':@' + "api.stripe.com/v1/tokens",  
         headers: {
         'Stripe-Account': request.params.accountId
         },
@@ -647,7 +647,7 @@ Parse.Cloud.define("createAccountCustomerToken", function (request, response) {
 Parse.Cloud.define("createAccountCustomerSubscription", function (request, response) {
      Parse.Cloud.httpRequest({
         method:"POST",
-        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/customers",  
+        url: "https://" + "sk_test_ZfEJGW8n8GPA21dMDgihwuj2" + ':@' + "api.stripe.com/v1/customers",  
         headers: {
         'Stripe-Account': request.params.accountId
         },
@@ -686,7 +686,7 @@ Parse.Cloud.define("createAccountCustomerSubscription", function (request, respo
 Parse.Cloud.define("cancelAccountCustomerSubscription", function (request, response) {
      Parse.Cloud.httpRequest({
         method:"DELETE",
-        url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1/customers/" + request.params.customerId,  
+        url: "https://" + "sk_test_ZfEJGW8n8GPA21dMDgihwuj2" + ':@' + "api.stripe.com/v1/customers/" + request.params.customerId,  
         headers: {
         'Stripe-Account': request.params.accountId
         },
@@ -703,7 +703,7 @@ Parse.Cloud.define("cancelAccountCustomerSubscription", function (request, respo
 Parse.Cloud.define("deleteStripeAccount", function (request, response) {
          Parse.Cloud.httpRequest({
                 method:"DELETE",
-                 url: "https://" + "sk_test_PvLy60iEFmCJrYqroqfRB1jm" + ':@' + "api.stripe.com/v1" + "/accounts/" + request.params.accountId,
+                 url: "https://" + "sk_test_ZfEJGW8n8GPA21dMDgihwuj2" + ':@' + "api.stripe.com/v1" + "/accounts/" + request.params.accountId,
               
             success: function(httpResponse) {
                 Parse.Cloud.useMasterKey();
