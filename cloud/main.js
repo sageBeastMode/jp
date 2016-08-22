@@ -12,11 +12,11 @@ Parse.Cloud.define("chargePTGUser", function (request, response) {
       },
 
     success: function(httpResponse) {
-        var data = params["data"];
+        // var data = params["data"];
         // var type = params["type"];
         // var accountId = params["user_id"];
 
-        var card = data["object[source[id]]"];
+        var card = httpResponse.data[2].body;
         // var cardLast4 = data.object.source.last4;
         // var amount = data.object.amount;
         // var typeId = data.object.id;
