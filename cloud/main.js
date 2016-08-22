@@ -82,7 +82,7 @@ Parse.Cloud.define("saveStripeCardId", function (request, response) {
         Parse.Cloud.useMasterKey();
         var CardObject = Parse.Object.extend("Cards");
         var addCard = new CardObject();
-        addCard.save({cardId:card.data.id, last4:request.params.last4, cardBrand:request.params.cardBrand, userId:request.params.userId, customerId:request.params.customerId},
+        addCard.save({cardId:card.data.id, last4:request.params.last4, cardBrand:request.params.cardBrand, userId:request.user},
             {
                 success: function(httpResponse) {
 
@@ -660,16 +660,21 @@ Parse.Cloud.define("createAccountCustomerSubscription", function (request, respo
         },
         success: function(httpResponse) {
             Parse.Cloud.useMasterKey();
-            var Usr = request.user;
-                Usr.set(request.params.galleryId,httpResponse.data.id);
-                Usr.save(null, {
-                success: function(httpResponse) {
-                response.success("good");
-                },
-                error: function(httpResponse, error) {
-                response.error(response.status);
-                }
-            })
+        var Activity = Parse.Object.extend("Activity");
+         
+        var GalleryObject = new Parse.Object("Gallery");
+         GalleryObject.id = request.params.galleryId;
+         
+        var subscribe = new Activity();
+         subscribe.save({customerId:httpResponse.data.id, type:'subscribe', toGallery:GalleryObject, fromUser:request.user},
+                {
+                    success: function(httpResponse) {
+                    response.success("good");
+                    },
+                    error: function(httpResponse, error) {
+                    response.error(response.status);
+                    }
+                });
         response.success(httpResponse.text);
         },
         error: function(httpResponse) {
