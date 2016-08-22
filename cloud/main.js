@@ -4,7 +4,8 @@ Parse.Cloud.define('hello', function(req, res) {
 });
 
 Parse.Cloud.define("chargePTGUser", function (request, response) {
-    var stripe = require('stripe')('sk_test_PvLy60iEFmCJrYqroqfRB1jm');
+    var Stripe = require("stripe")("sk_test_PvLy60iEFmCJrYqroqfRB1jm");
+    Stripe.initialize("sk_test_PvLy60iEFmCJrYqroqfRB1jm");
 
     stripe.customers.create(
       { email: 'customer@example.com' },
