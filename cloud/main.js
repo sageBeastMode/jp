@@ -69,7 +69,41 @@ Parse.Cloud.define("updatePTGUser", function (request, response) {
     });
 });
 
-//https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/chargePTGUser
+Parse.Cloud.define("subscribeEvent", function (request, response) {
+    Parse.Cloud.useMasterKey();
+    var data = request.params["data"];
+    var type = request.params["type"];
+    var accountId = request.params["user_id"];
+
+    var amount = data.object.amount;
+    var typeId = data.object.id;
+    var galleryId = data.object.plan.id;
+    var customerId = data.object.customer;
+    var objectName = data.object.object;
+    var eventObject = new Parse.Object("WebhookEvents");
+    eventObject.set("customerId", customerId);
+    eventObject.set("accountId", accountId);
+    eventObject.set("galleryId", galleryId);
+    eventObject.set("amount", amount);
+    eventObject.set("type", type);
+    eventObject.set("objectName", objectName);
+    eventObject.set("typeId", typeId);
+    eventObject.save(null, {
+      success: function(eventObject) {
+        response.success('** WEBHOOK WORKING **';
+        // Execute any logic that should take place after the object is saved.
+        alert('New object created with objectId: ');
+      },
+      error: function(eventObject, error) {
+        // Execute any logic that should take place if the save fails.
+        // error is a Parse.Error with an error code and message.
+        alert('Failed to create new object, with error code: ');
+      }
+    });
+});
+
+
+//https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/subscribeEvent
 
 //add Stripe customer card.
 Parse.Cloud.define("saveStripeCardId", function (request, response) {
