@@ -5,7 +5,6 @@ Parse.Cloud.define('hello', function(req, res) {
 
 Parse.Cloud.afterSave("SinchMessage", function(request) {
   // Our "Comment" class has a "text" key with the body of the comment itself
-  Parse.Cloud.useMasterKey();
   var messageText = request.object.get('text');
   var messageRecipient = request.object.get('recipientId');
   var messageSender = request.object.get('senderId');
@@ -16,7 +15,6 @@ Parse.Cloud.afterSave("SinchMessage", function(request) {
   pushQuery.equalTo('GCMSenderId', messageRecipient);
     
   Parse.Push.send({
-    Parse.Cloud.useMasterKey();
     where: pushQuery, // Set our Installation query
     data: {
       alert: messageSender+": " + messageText,
@@ -30,7 +28,7 @@ Parse.Cloud.afterSave("SinchMessage", function(request) {
     error: function(error) {
       throw "Got an error " + error.code + " : " + error.message;
     }
-  });
+  },{ useMasterKey: true });
 });
 
 Parse.Cloud.define("chargePTGUser", function (request, response) {
