@@ -22,7 +22,7 @@ if (process.env.APNS_ENABLE) {
     pushConfig['ios'] = [
         {
             pfx: 'ParsePushDevelopmentCertificate.p12', // P12 file only
-            bundleId: 'beta.codepath.parsetesting',  // change to match bundleId
+            bundleId: 'com.dimecore.Pictrada',  // change to match bundleId
             production: false // dev certificate
         }
     ]
