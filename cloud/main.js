@@ -731,7 +731,7 @@ Parse.Cloud.define("createAccountCustomerSubscription", function (request, respo
         var GalleryObject = new Parse.Object("Gallery");
          GalleryObject.id = request.params.galleryId;
 
-         var accUserObject = new Parse.Object("User");
+         var accUserObject = new Parse.User();
          accUserObject.id = request.params.accUserId;
          
         var subscribe = new Activity();
