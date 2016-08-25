@@ -11,7 +11,7 @@ Parse.Cloud.afterSave("SinchMessage", function(request) {
   var messageSender = request.object.get('senderId');
  
   var pushQuery = new Parse.Query(Parse.Installation);
-  // pushQuery.equalTo('deviceType', 'ios');
+  pushQuery.equalTo('deviceType', 'ios');
 
   pushQuery.equalTo('GCMSenderId', messageRecipient);
     
