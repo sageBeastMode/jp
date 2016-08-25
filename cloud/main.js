@@ -19,17 +19,18 @@ Parse.Cloud.afterSave("SinchMessage", function(request) {
     where: pushQuery, // Set our Installation query
     data: {
       alert: messageSender+": " + messageText,
-      badge: "Increment", 
+      badge: 1, 
       sound: "default"
     }
   }, {
+    useMasterKey: true,
     success: function() {
       // Push was successful
     },
     error: function(error) {
       throw "Got an error " + error.code + " : " + error.message;
-    },
-    useMasterKey: true
+    }
+    
   });
 });
 
