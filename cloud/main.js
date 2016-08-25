@@ -26,6 +26,7 @@ Parse.Cloud.afterSave("SinchMessage", function(request) {
     useMasterKey: true,
     success: function() {
       // Push was successful
+      console.log("Push was successful");
     },
     error: function(error) {
       throw "Got an error " + error.code + " : " + error.message;
