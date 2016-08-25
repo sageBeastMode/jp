@@ -135,7 +135,7 @@ Parse.Cloud.define("subscribeEvent", function (request, response) {
 });
 
 
-//https://1IIaaLUqc6kJ4Y6zxlwW9OOANHn5v3UXYjgo1oSH:javascript-key=lkeHCFyOoFrEyLRHYQyTxVxbp3G4AABh1nVFHJ4z@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/subscribeEvent
+//https://WA038vkhbaptA3PV2hkL7eSH0453xwEcm50S5WEj:javascript-key=U2EfLs5ofIydQHHt9wM7FAGOBGiHhBUu76JNZQVn@jpserver-dev.us-east-1.elasticbeanstalk.com/parse/functions/subscribeEvent
 
 //add Stripe customer card.
 Parse.Cloud.define("saveStripeCardId", function (request, response) {
@@ -730,9 +730,12 @@ Parse.Cloud.define("createAccountCustomerSubscription", function (request, respo
          
         var GalleryObject = new Parse.Object("Gallery");
          GalleryObject.id = request.params.galleryId;
+
+         var accUserObject = new Parse.Object("User");
+         accUserObject.id = request.params.accUserId;
          
         var subscribe = new Activity();
-         subscribe.save({customerId:httpResponse.data.id, type:'subscribe', toGallery:GalleryObject, fromUser:request.user},
+         subscribe.save({customerId:httpResponse.data.id, type:'subscribe', toGallery:GalleryObject, fromUser:request.user, toUser:accUserObject},
                 {
                     success: function(httpResponse) {
                     response.success("good");
