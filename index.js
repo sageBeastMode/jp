@@ -24,6 +24,11 @@ if (process.env.APNS_ENABLE) {
             pfx: 'ptDevCerti2.p12', // P12 file only
             bundleId: 'com.dimecore.Pictrada',  // change to match bundleId
             production: false // dev certificate
+        },
+        {
+            pfx: 'ptDevCerti2.p12', // P12 file only
+            bundleId: 'com.dimecore.Pictrada',  // change to match bundleId
+            production: true // prod certificate
         }
     ]
 }
