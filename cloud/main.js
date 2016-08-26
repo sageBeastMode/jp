@@ -20,8 +20,7 @@ Parse.Cloud.afterSave("SinchMessage", function(request) {
     data: {
       alert: messageSender+": " + messageText,
       badge: 1, 
-      sound: "default",
-      content-available: 1
+      sound: "default"
     }
   }, {
     useMasterKey: true,
