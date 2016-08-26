@@ -40,7 +40,8 @@ if (!databaseUri) {
 //         {bucket: process.env.AWS_BUCKET_NAME, bucketPrefix: "", directAccess: true}
 //     );
 // }
-var developPath = path.resolve(__dirname, 'PSPushDevCertificates.p12');
+// var developPath = path.resolve(__dirname, 'PSPushDevCertificates.p12');
+
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
@@ -51,7 +52,7 @@ var api = new ParseServer({
   // filesAdapter: filesAdapter,
   push:{
     ios:{
-      pfx:developPath, // P12 file only
+      pfx:d'PSPushDevCertificates.p12', // P12 file only
       bundleId: 'com.dimecore.Pictrada',  // change to match bundleId
       production: false // dev certificate
     }
