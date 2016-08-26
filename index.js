@@ -55,7 +55,7 @@ var api = new ParseServer({
       bundleId: 'com.dimecore.Pictrada',  // change to match bundleId
       production: false // dev certificate
     }
-  }
+  },
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
