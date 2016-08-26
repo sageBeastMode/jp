@@ -52,7 +52,7 @@ var api = new ParseServer({
   // filesAdapter: filesAdapter,
   push:{
     ios:{
-      pfx:d'PSPushDevCertificates.p12', // P12 file only
+      pfx:'PSPushDevCertificates.p12', // P12 file only
       bundleId: 'com.dimecore.Pictrada',  // change to match bundleId
       production: false // dev certificate
     }
